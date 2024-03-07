@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/users.css" />
+    <title>Users</title>
+  </head>
+  <body>
+    <div class="header horizont-box">
+      <form class="card form-inline search-form js-create-form">
+        <div class="form-group">
+          Name: <input type="text" name="userName" />
+        </div>
+        <div class="form-group">
+          Phone: <input type="text" name="userPhone" />
+        </div>
+        <div class="form-group">
+          Email: <input type="text" name="userEmail" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Створити</button>
+      </form>
+
+      <form class="card form-inline search-form js-update-form">
+        <div class="form-group">Id: <input type="text" name="userId" /></div>
+        <div class="form-group">
+          Name: <input type="text" name="userName" />
+        </div>
+        <div class="form-group">
+          Phone: <input type="text" name="userPhone" />
+        </div>
+        <div class="form-group">
+          Email: <input type="text" name="userEmail" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Оновити</button>
+      </form>
+
+      <form class="card form-inline search-form js-reset-form">
+        <div class="form-group">Id: <input type="text" name="userId" /></div>
+        <div class="form-group">
+          Name: <input type="text" name="userName" />
+        </div>
+        <div class="form-group">
+          Phone: <input type="text" name="userPhone" />
+        </div>
+        <div class="form-group">
+          Email: <input type="text" name="userEmail" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Перезаписати</button>
+      </form>
+
+      <form class="card form-inline search-form js-delete-form">
+        <div class="form-group">Id: <input type="text" name="userId" /></div>
+        <button type="submit" class="btn btn-primary">Видалити</button>
+      </form>
+    </div>
+
+    <ul class="news-list js-user-list">
+      <li class="card user-item" data-id="${id}">
+        <img
+          src="https://source.unsplash.com/1280x720/?random=431&book"
+          alt="#"
+          class="user-avatar"
+        />
+        <h3 class="user-title">Real Full Name Real Full Name</h3>
+        <p>Email: Test Email</p>
+        <p>Phone: +38099123123</p>
+        <button class="btn button">DELETE</button>
+      </li>
+    </ul>
+
+    <script src="../js/users.js" type="module"></script>
+  </body>
+</html>

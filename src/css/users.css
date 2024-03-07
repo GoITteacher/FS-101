@@ -1,0 +1,38 @@
+.user-item {
+  width: 250px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 15px;
+  height: 370px;
+  gap: 5px;
+}
+
+.user-avatar {
+  width: 100%;
+  height: 200px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+
+.btn {
+  width: 100%;
+  background-color: rgb(215, 215, 215);
+}
+
+.user-title {
+  margin: 10px 0;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.user-item p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.user-item * {
+  margin: 0;
+}
