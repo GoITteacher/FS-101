@@ -1,0 +1,209 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.5;
+  color: #2a2a2a;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.card {
+  background: #f2f2f2;
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 0 20px 8px #d0d0d0;
+}
+
+.news-image {
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.news-card {
+  position: relative;
+  width: 500px;
+  height: 600px;
+  padding: 10px;
+}
+
+.card-title {
+  margin: 20px 5px;
+  color: rgb(64, 64, 64);
+  font-size: 30px;
+  text-shadow: #2a2a2a;
+  text-shadow: 2px 0 2px #d0d0d0, 0 2px 2px #d0d0d0, -2px 0 2px #d0d0d0,
+    0 -2px 2px #d0d0d0;
+}
+
+.card-desc {
+  height: 190px;
+  overflow: auto;
+  margin: 10px;
+}
+
+.card-desc::-webkit-scrollbar {
+  width: 7px;
+  background-color: #f9f9fd;
+}
+.card-desc::-webkit-scrollbar-thumb {
+  background-color: #223c50;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.news-list {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 90vw;
+  min-height: 500px;
+  overflow-y: auto;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.news-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.news-list::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+
+.news-list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(180deg, #00c6fb, #005bea);
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  max-width: calc(100vw - 80px);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.articles li {
+  height: 450px;
+  overflow: hidden;
+}
+
+.articles img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.articles a {
+  text-decoration: none;
+  color: #2a2a2a;
+}
+
+.button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button.is-hidden {
+  display: none;
+}
+
+.button > .spinner.is-hidden {
+  display: none;
+}
+
+.card-job {
+  padding: 20px;
+  width: 30vw;
+}
+
+.pagination {
+  display: flex;
+  padding: 10px;
+  border: 1px solid tomato;
+  border-radius: 10px;
+}
+.pagination li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination li.active {
+  background-color: #bef1ff;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-form {
+  padding: 20px;
+  height: 250px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.horizont-box {
+  flex-direction: row;
+}
+
+.btn-primary {
+  margin-top: 10px;
+}
