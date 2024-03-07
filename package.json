@@ -1,0 +1,19 @@
+{
+  "name": "js-theorety",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "push": "git add .; git commit -m 'update'; git push;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoITteacher/js-theorety-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GoITteacher/js-theorety-template/issues"
+  },
+  "homepage": "https://github.com/GoITteacher/js-theorety-template#readme"
+}
