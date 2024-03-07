@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.box {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.js-left {
+  width: 25vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.js-right {
+  width: 50vw;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.js-formsearch {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.js-save-elem {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  align-items: center;
+  max-width: 30vw;
+  padding: 5px;
+  margin: 10px 0 0 0;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.js-formsearch > * {
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin: 10px 0 0 0;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.list > li,
+.js-save-elem > li {
+  cursor: pointer;
+  background-color: silver;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  width: 100%;
+}
+
+img {
+  min-height: 600px;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.ingridient-list {
+  width: 300px;
+}

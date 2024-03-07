@@ -1,0 +1,22 @@
+.hero-body {
+  margin: 20px 0 0 0;
+  height: 200px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.hero-bio {
+  margin: 0;
+}
+
+.hero-powerstats {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin: 10px 0;
+  padding: 5px 0;
+  gap: 2px;
+}

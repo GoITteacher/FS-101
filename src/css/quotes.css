@@ -1,0 +1,14 @@
+.quote {
+  height: 250px;
+  padding: 5px;
+}
+
+.quote-name {
+  margin: 15px 0;
+}
+
+.quote-body {
+  height: 180px;
+  width: 90%;
+  overflow-y: auto;
+}
