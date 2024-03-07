@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Search</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <p><a href="index.html">Go back</a></p>
+
+    <form action="submit" class="js-form car-search">
+      <div class="car-group">
+        <input type="text" name="query" class="car-input" placeholder="Пошук" />
+      </div>
+      <div class="car-group">
+        <div>
+          <input type="radio" name="onsale" value="supercar" />
+          <label for="onsale">Supercar</label>
+        </div>
+        <div>
+          <input type="radio" name="onsale" value="suv" />
+          <label for="onsale">SUV</label>
+        </div>
+        <div>
+          <input type="radio" name="onsale" value="sedan" />
+          <label for="onsale">Sedan</label>
+        </div>
+        <div>
+          <input type="radio" name="onsale" value="all" checked />
+          <label for="onsale">All Type</label>
+        </div>
+      </div>
+      <button class="car-button">Пошук</button>
+    </form>
+
+    <ul class="js-list car-list">
+      <li class="car-item">
+        <img
+          src="https://source.unsplash.com/1920x1280/?random=18&nissan"
+          alt=""
+        />
+        <div class="car-info">
+          <h3>Test Title</h3>
+          <p>Type: sport</p>
+          <p>Price: 1000$</p>
+        </div>
+      </li>
+    </ul>
+
+    <script src="./js/06-practice.js"></script>
+  </body>
+</html>

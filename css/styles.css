@@ -1,0 +1,70 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+  line-height: 1.5;
+  color: #2a2a2a;
+}
+
+button,
+label {
+  cursor: pointer;
+}
+
+input {
+  font: inherit;
+}
+
+.section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.car-list {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 80vw;
+  gap: 10px;
+}
+
+.car-item {
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.car-item img {
+  width: 100%;
+  min-height: 130px;
+}
+
+.car-info {
+  padding: 10px;
+}
+
+.car-item h3,
+.car-item p {
+  margin: 0;
+}
+
+.car-search {
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: 10px;
+}
+.car-group {
+  display: flex;
+  flex-direction: column;
+}
