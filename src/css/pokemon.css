@@ -1,0 +1,36 @@
+.pokemon {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.pokemon-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pokemon-img {
+  width: 100%;
+  height: 200px;
+}
+.pokemon-title {
+  margin: 0;
+  font-size: 20px;
+}
+.pokemon-id {
+  font-size: 15px;
+  color: grey;
+}
+
+.pokemon-desc {
+  border: 1px solid rgba(0, 0, 0, 0.413);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-footer {
+}
