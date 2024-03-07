@@ -4,9 +4,9 @@
 
 2. Розберемо:
 
-- node js +
 - terminal +
-- npm
+- node js +
+- npm +
 
   - init
   - install
@@ -14,7 +14,7 @@
   - script
   - node-modules
 
-- Що таке мініфікація та транспіляція коду
+- Що таке мініфікація та транспіляція коду (15хв)
 - Що таке збирач проекту на прикладі [Vite] (https://vitejs.dev/)
 - Використання Vite-збірки
   [vanilla-app-template](https://github.com/goitacademy/vanilla-app-template)

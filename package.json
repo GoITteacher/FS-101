@@ -13,7 +13,7 @@
     "url": "git+https://github.com/GoITteacher/js-theorety-template.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Volodka",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/GoITteacher/js-theorety-template/issues"
@@ -23,6 +23,8 @@
     "vite": "^4.0.5"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "basiclightbox": "^5.0.4",
     "vite-plugin-full-reload": "^1.0.5",
     "vite-plugin-html-inject": "^1.0.1"
   },
