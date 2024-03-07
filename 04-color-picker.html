@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/04-color-picker.css" />
+  </head>
+  <body>
+    <div class="backdrop js-backdrop">
+      <div class="modal"></div>
+    </div>
+
+    <div class="box">
+      <ul class="colors-box js-colors-box">
+        <li class="color-item">
+          <button class="color-body" style="background-color: red"></button>
+          <div class="color-footer">
+            <div>HEX: ....</div>
+            <div>RGB: ....</div>
+            <div></div>
+          </div>
+        </li>
+
+        <li class="color-item">
+          <button class="color-body" style="background-color: red"></button>
+          <div class="color-footer">
+            <div>HEX: ....</div>
+            <div>RGB: ....</div>
+            <div></div>
+          </div>
+        </li>
+
+        <li class="color-item active">
+          <button class="color-body" style="background-color: red"></button>
+          <div class="color-footer">
+            <div>HEX: ....</div>
+            <div>RGB: ....</div>
+            <div></div>
+          </div>
+        </li>
+      </ul>
+      <input type="button" value="Reload Color" class="js-reload-color" />
+    </div>
+
+    <input
+      type="button"
+      value="Главное меню"
+      onclick="history.back()"
+      class="fixed-btn"
+    />
+    <script src="js/04-color-picker.js"></script>
+  </body>
+</html>
