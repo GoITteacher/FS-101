@@ -17,3 +17,17 @@
 
 5. Що на вас чекатиме на наступному занятті? Ми поговоримо про проміси і
    промісифікацію.
+
+   ***
+
+   ```js
+   getTimeComponents(time) {
+    const hours = this.pad(
+      Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    );
+    const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+    const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+
+    return { hours, mins, secs };
+   }
+   ```

@@ -2,24 +2,47 @@
  * Метод window.setTimeout(callback, delay, args)
  */
 
-console.log("До виклику setTimeout");
+// function sayHello() {
+//   console.log('Hello world');
+// }
 
-console.log("1 - Всередині зворотного виклику для setTimeout");
+// setTimeout(sayHello, 200);
+// setTimeout(sayHello, 1000);
+// setTimeout(sayHello, 3000);
 
-console.log("2 - Всередині зворотного виклику для setTimeout");
-
-console.log("Після виклику setTimeout");
+// for (let i = 0; i < 100000; i++) {
+//   console.log(i);
+// }
 
 /*
  * Очищення таймаута за допомогою clearTimeout(timeoutId)
  */
-const logger = (time) => {
-  console.log(`Лог через ${time} мс, оскільки не скасували таймаут`);
-};
+
+/* const timeoutId = setTimeout(() => {
+  console.log('Hello 1');
+}, 5000);
+
+setTimeout(() => {
+  console.log('hello 2');
+}, 2000);
+
+setTimeout(() => {
+  console.log('hello 3');
+}, 4000);
+
+clearTimeout(timeoutId); */
 
 /**
  * Можливість передати параметри для колбеку
  */
-const id = setTimeout((name, country) => {
-  console.log(`Hello, my name is ${name}, I'm from ${country}`);
-}, 1000);
+
+for (let i = 0; i < 5; i++) {
+  //   setTimeout(sayHello, i * 1000, i);
+  setTimeout(() => {
+    sayHello(i, 10, 20);
+  }, 5000);
+}
+
+function sayHello(i) {
+  console.log(i);
+}
