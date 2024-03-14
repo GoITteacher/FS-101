@@ -1,57 +1,104 @@
 /*
  * Промісифікація:
  * - Проблема доступу до результату проміса з колбеком
- * - Функція, яка повертає проміс
+ * - Функція, яка повертає проміс✅❌
  */
 
-const makeOrder = (dish, onSuccess, onError) => {
-  const passed = Math.random() > 0.5;
+/* function createPromise(delay, state, value) {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (state === 'green') {
+        resolve(value);
+      } else {
+        reject(value);
+      }
+    }, delay);
+  });
 
-  setTimeout(() => {
-    if (passed) {
-      onSuccess(`✅ Ваше замовлення: ${dish}`);
-    }
+  return promise;
+}
 
-    onError("❌ Упс, у нас закінчилися продукти");
-  }, 1000);
-};
+const p1 = createPromise(5000, 'green', 'p1');
+const p2 = createPromise(2000, 'red', 'p2');
+const p3 = createPromise(4000, 'green', 'p3');
 
-makeOrder(
-  "пиріжок",
-  (result) => {
-    console.log("onMakeOrderSuccess");
-    console.log(result);
-  },
-  (error) => {
-    console.log("onMakeOrderError");
-    console.log(error);
-  }
-);
+p1.then(onFulFilled).catch(onRejected);
+p2.then(onFulFilled).catch(onRejected);
+p3.then(onFulFilled).catch(onRejected);
 
+function onFulFilled(data) {
+  console.log(`✅ - ${data}`);
+}
+
+function onRejected(data) {
+  console.log(`❌ - ${data}`);
+} */
 /*
  * Промісифікація «синхронних» функцій
  * - Promise.resolve()
  * - Promise.reject()
  */
 
-const prepareDish = (dish, onSuccess, onError) => {
-  const passed = Math.random() > 0.5;
+// function foo() {
+//   const arr = [];
+//   // ...
+//   return Promise.resolve(arr);
+// }
 
-  if (passed) {
-    onSuccess(`✅ Ваше замовлення: ${dish}`);
-  }
+// function foo() {
+//   const arr = [1, 2, 3, 45];
 
-  onError("❌ Упс, у нас закінчилися продукти");
-};
+//   return Promise.resolve(arr);
+// }
 
-makeOrder(
-  "пиріжок",
-  (result) => {
-    console.log("onMakeOrderSuccess");
+// foo()
+//   .then(value => {
+//     console.log(value);
+//   })
+//   .catch();
+
+// ==========================================
+/* 
+function createPromise(delay, isActive, value) {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (isActive) {
+        resolve(value);
+      } else {
+        reject(value);
+      }
+    }, delay);
+  });
+
+  return promise;
+}
+
+const p1 = createPromise(1000, false, 'мясо');
+const p2 = createPromise(4000, true, 'картопля');
+const p3 = createPromise(2000, false, 'пампушки');
+const p4 = createPromise(5000, true, 'сметана');
+
+const promises = [p1, p2, p3, p4];
+
+Promise.race(promises)
+  .then(value => {
+    console.log(value);
+  })
+  .catch(err => {
+    console.log(err);
+  }); */
+
+// =======================
+// Promise.allSettled(promises).then(result => {
+//   console.log(result);
+// });
+// =======================
+/* Promise.all(promises)
+  .then(result => {
     console.log(result);
-  },
-  (error) => {
-    console.log("onMakeOrderError");
-    console.log(error);
-  }
-);
+  })
+  .catch(err => {
+    console.log(err);
+  }); */
+
+// ======================

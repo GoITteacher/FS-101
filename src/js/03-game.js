@@ -22,4 +22,47 @@
 
 const startBtn = document.querySelector('.start-btn');
 const container = document.querySelector('.container');
-const result = document.querySelector('.result');
+const resultElem = document.querySelector('.result');
+
+startBtn.addEventListener('click', () => {
+  const promises = [];
+  for (let i = 0; i < 3; i++) {
+    container.children[i].textContent = '';
+    const promise = createPromise((i + 1) * 100);
+    promise
+      .then(smile => {
+        container.children[i].textContent = smile;
+      })
+      .catch(smile => {
+        container.children[i].textContent = smile;
+      });
+
+    promises.push(promise);
+  }
+
+  Promise.allSettled(promises).then(result => {
+    console.log(result);
+    const isWon = result
+      .map(el => {
+        return el.reason || el.value;
+      })
+      .every(el => el === '🤑');
+
+    resultElem.textContent = isWon ? 'Winner!' : 'Loser!';
+  });
+});
+
+function createPromise(delay) {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const random = Math.random();
+      if (random > 0.3) {
+        resolve('🤑');
+      } else {
+        reject('👿');
+      }
+    }, delay);
+  });
+
+  return promise;
+}
