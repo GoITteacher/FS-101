@@ -3,23 +3,12 @@ const refs = {
   heroEl: document.querySelector('.js-hero-container'),
 };
 
-refs.formEl.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const hero = e.target.elements.query.value;
-
-  searchHero(hero).then(data => {
-    renderHero(data);
+function getSuperhero(query) {
+  const BASE_URL = 'https://superhero-search.p.rapidapi.com/api/';
+  const params = new URLSearchParams({
+    hero: query,
   });
-
-  e.target.reset();
-});
-
-function searchHero(userValue) {
-  const BASE_URL = 'https://superhero-search.p.rapidapi.com';
-  const END_POINT = '/api/';
-  const PARAMS = `?hero=${userValue}`;
-  const url = BASE_URL + END_POINT + PARAMS;
+  const url = `${BASE_URL}?${params}`;
 
   const options = {
     headers: {
@@ -30,6 +19,16 @@ function searchHero(userValue) {
 
   return fetch(url, options).then(res => res.json());
 }
+
+refs.formEl.addEventListener('submit', e => {
+  e.preventDefault();
+  const query = e.target.elements.superhero.value;
+
+  getSuperhero(query).then(data => {
+    const markup = heroTemplate(data);
+    refs.heroEl.insertAdjacentHTML('beforeend', markup);
+  });
+});
 
 function heroTemplate(hero) {
   return `<div class="hero-card card">
@@ -42,14 +41,21 @@ function heroTemplate(hero) {
   </div>
   <div class="hero-body">
     <h4 class="hero-name">${hero.name}</h4>
-    <p class="hero-bio">
-      ${hero.biography.fullName} - ${hero.biography.placeOfBirth}, ${hero.work.base}
-    </p>
+
+    <div class="hero-powerstats">
+      <p class="hero-bio">FullName - ${hero.biography.fullName}</p>
+      <p class="hero-bio">Publisher - Marvel Comics</p>
+      <p class="hero-bio">Alignment - good</p>
+      <p class="hero-bio">Gender - Male</p>
+      <p class="hero-bio">Race - Human</p>
+    </div>
+
+    <div class="hero-powerstats">
+      <span>Power: 10</span>
+      <span>Strength: 10</span>
+      <span>Speed: 10</span>
+      <span>Combat: 10</span>
+    </div>
   </div>
 </div>`;
-}
-
-function renderHero(hero) {
-  const markup = heroTemplate(hero);
-  refs.heroEl.insertAdjacentHTML('afterbegin', markup);
 }

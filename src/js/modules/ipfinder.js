@@ -3,21 +3,13 @@ const refs = {
   cardInfo: document.querySelector('.js-ip-form'),
 };
 
-refs.formEl.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const ip = e.target.elements.userip.value;
-
-  getInfoByIp(ip).then(data => {
-    renderIp(data);
-  });
-});
-
-function getInfoByIp(ip) {
+function getInfoByIp(userIp) {
   const BASE_URL = 'https://ip-geolocation-ipwhois-io.p.rapidapi.com';
   const END_POINT = '/json/';
-  const PARAMS = `?ip=${ip}`;
-  const url = BASE_URL + END_POINT + PARAMS;
+  const params = new URLSearchParams({
+    ip: userIp,
+  });
+  const url = `${BASE_URL}${END_POINT}?${params}`;
 
   const options = {
     headers: {
@@ -29,7 +21,21 @@ function getInfoByIp(ip) {
   return fetch(url, options).then(res => res.json());
 }
 
-function renderIp({
+refs.formEl.addEventListener('submit', e => {
+  e.preventDefault();
+  const userIp = e.target.elements.userip.value;
+
+  getInfoByIp(userIp).then(data => {
+    const markup = templateIp(data);
+    refs.cardInfo.innerHTML = markup;
+  });
+
+  e.target.reset();
+});
+
+// =========================
+
+function templateIp({
   country,
   ip,
   city,
@@ -41,7 +47,7 @@ function renderIp({
   latitude,
   longitude,
 }) {
-  const markup = `
+  return `
     <div class="info-item">
     <img
       class="flag"
@@ -78,6 +84,4 @@ function renderIp({
     <span class="info-label">Google Maps:</span>
     <a href="https://www.google.com.ua/maps/@${latitude},${longitude},13.18z?entry=ttu"><span class="info-value">Тицяй</span></a>
   </div>`;
-
-  refs.cardInfo.innerHTML = markup;
 }
