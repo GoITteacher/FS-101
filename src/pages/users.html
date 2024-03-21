@@ -31,31 +31,19 @@
       </form>
 
       <form class="card form-inline search-form js-update-form">
-        <div class="form-group">Id: <input type="text" name="userId" /></div>
-        <div class="form-group">
-          Name: <input type="text" name="userName" />
-        </div>
-        <div class="form-group">
-          Phone: <input type="text" name="userPhone" />
-        </div>
-        <div class="form-group">
-          Email: <input type="text" name="userEmail" />
-        </div>
+        <div class="form-group">Id: <input type="text" name="id" /></div>
+        <div class="form-group">Name: <input type="text" name="name" /></div>
+        <div class="form-group">Phone: <input type="text" name="phone" /></div>
+        <div class="form-group">Email: <input type="text" name="email" /></div>
 
         <button type="submit" class="btn btn-primary">Оновити</button>
       </form>
 
       <form class="card form-inline search-form js-reset-form">
-        <div class="form-group">Id: <input type="text" name="userId" /></div>
-        <div class="form-group">
-          Name: <input type="text" name="userName" />
-        </div>
-        <div class="form-group">
-          Phone: <input type="text" name="userPhone" />
-        </div>
-        <div class="form-group">
-          Email: <input type="text" name="userEmail" />
-        </div>
+        <div class="form-group">Id: <input type="text" name="id" /></div>
+        <div class="form-group">Name: <input type="text" name="name" /></div>
+        <div class="form-group">Phone: <input type="text" name="phone" /></div>
+        <div class="form-group">Email: <input type="text" name="email" /></div>
 
         <button type="submit" class="btn btn-primary">Перезаписати</button>
       </form>
@@ -66,19 +54,7 @@
       </form>
     </div>
 
-    <ul class="news-list js-user-list">
-      <li class="card user-item" data-id="${id}">
-        <img
-          src="https://source.unsplash.com/1280x720/?random=431&book"
-          alt="#"
-          class="user-avatar"
-        />
-        <h3 class="user-title">Real Full Name Real Full Name</h3>
-        <p>Email: Test Email</p>
-        <p>Phone: +38099123123</p>
-        <button class="btn button">DELETE</button>
-      </li>
-    </ul>
+    <ul class="news-list js-user-list"></ul>
 
     <script src="../js/users.js" type="module"></script>
   </body>
