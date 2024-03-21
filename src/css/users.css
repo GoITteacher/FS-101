@@ -16,7 +16,7 @@
 
 .btn {
   width: 100%;
-  background-color: rgb(215, 215, 215);
+  border: 1px solid rgba(0, 0, 0, 0.437);
 }
 
 .user-title {
