@@ -1,23 +1,19 @@
+import axios from 'axios';
+
 const refs = {
   formEl: document.querySelector('.js-hero-form'),
   heroEl: document.querySelector('.js-hero-container'),
 };
 
-function getSuperhero(query) {
-  const BASE_URL = 'https://superhero-search.p.rapidapi.com/api/';
-  const params = new URLSearchParams({
-    hero: query,
-  });
-  const url = `${BASE_URL}?${params}`;
-
-  const options = {
-    headers: {
-      'X-RapidAPI-Key': 'f6fe44fec7msh9f58de139869781p15408ajsn8e7b73b5d6b1',
-      'X-RapidAPI-Host': 'superhero-search.p.rapidapi.com',
-    },
+async function getSuperhero(query) {
+  const url = 'https://superhero-search.p.rapidapi.com/api/';
+  const params = { hero: query };
+  const headers = {
+    'X-RapidAPI-Key': 'f6fe44fec7msh9f58de139869781p15408ajsn8e7b73b5d6b1',
+    'X-RapidAPI-Host': 'superhero-search.p.rapidapi.com',
   };
-
-  return fetch(url, options).then(res => res.json());
+  const res = await axios.get(url, { params, headers });
+  return res.data;
 }
 
 refs.formEl.addEventListener('submit', e => {

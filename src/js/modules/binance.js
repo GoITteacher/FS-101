@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const refs = {
   formEl: document.querySelector('.js-binance-form'),
   infoEl: document.querySelector('.js-binance-info'),
@@ -5,39 +7,35 @@ const refs = {
 
 // =================================
 
-refs.formEl.addEventListener('submit', e => {
+refs.formEl.addEventListener('submit', async e => {
   e.preventDefault();
   const query = refs.formEl.elements.query.value;
 
-  getPrice(query)
-    .then(data => {
-      const markup = symbolTemplate(data);
-      refs.infoEl.innerHTML = markup;
-    })
-    .catch(err => {
-      console.log(err);
-      refs.infoEl.innerHTML = '';
-    });
+  try {
+    const data = await getPrice(query);
+    const markup = symbolTemplate(data);
+    refs.infoEl.innerHTML = markup;
+  } catch (err) {
+    console.log(err);
+    refs.infoEl.innerHTML = '';
+  }
 });
 
 // =================================
 
-function getPrice(query) {
+async function getPrice(query) {
   const BASE_URL = 'https://binance43.p.rapidapi.com';
   const END_POINT = '/ticker/price';
-  const params = new URLSearchParams({
-    symbol: query,
-  });
-  const url = `${BASE_URL}${END_POINT}?${params}`;
+  const url = `${BASE_URL}${END_POINT}`;
 
-  const options = {
-    headers: {
-      'X-RapidAPI-Key': 'f6fe44fec7msh9f58de139869781p15408ajsn8e7b73b5d6b1',
-      'X-RapidAPI-Host': 'binance43.p.rapidapi.com',
-    },
+  const params = { symbol: query };
+  const headers = {
+    'X-RapidAPI-Key': 'f6fe44fec7msh9f58de139869781p15408ajsn8e7b73b5d6b1',
+    'X-RapidAPI-Host': 'binance43.p.rapidapi.com',
   };
 
-  return fetch(url, options).then(res => res.json());
+  const res = await axios.get(url, { params, headers });
+  return res.data;
 }
 
 // =================================
