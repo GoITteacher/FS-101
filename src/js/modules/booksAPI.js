@@ -1,13 +1,27 @@
-export class BooksAPI {
+import Axios from 'axios';
+
+const myAxios = Axios.create({
+  baseURL: 'http://localhost:3000/books',
+  headers: {
+    api_key: 'awdawdawdawd',
+  },
+  params: {
+    api_key: 'Hello',
+  },
+});
+
+export class BooksAPI2 {
   constructor() {
     this.BASE_URL = 'http://localhost:3000';
     this.END_POINT = '/books';
     this.API_KEY = '123123';
   }
 
-  getBooks() {
+  async getBooks() {
     const url = this.BASE_URL + this.END_POINT;
-    return fetch(url).then(res => res.json());
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
   }
 
   createBook(data) {
@@ -60,5 +74,37 @@ export class BooksAPI {
     };
 
     return fetch(url, options).then(res => res.json());
+  }
+}
+
+export class BooksAPI {
+  async getBooks() {
+    const params = {
+      myParam: 'Hello World',
+    };
+
+    const headers = {};
+
+    const res = await myAxios.get('', { params, headers });
+    return res.data;
+  }
+
+  async createBook(data) {
+    const res = await myAxios.post('', data);
+    return res.data;
+  }
+
+  async updateBook(id, book) {
+    const res = await myAxios.patch(`/${id}`, book);
+    return res.data;
+  }
+
+  async resetBook(id, book) {
+    const res = await myAxios.put(`/${id}`, book);
+    return res.data;
+  }
+
+  deleteBook(id) {
+    return myAxios.delete(`/${id}`);
   }
 }

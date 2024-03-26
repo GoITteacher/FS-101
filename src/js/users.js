@@ -22,7 +22,7 @@ refs.updateUserForm.addEventListener('submit', onUpdateUser);
 refs.resetUserForm.addEventListener('submit', onResetUser);
 refs.deleteUserForm.addEventListener('submit', onDeleteUser);
 
-function onCreateUser(e) {
+async function onCreateUser(e) {
   e.preventDefault();
 
   const myData = {
@@ -32,14 +32,14 @@ function onCreateUser(e) {
     img: `https://source.unsplash.com/720x1280/?random=${Math.random()}&girl,portret,celebrity`,
   };
 
-  createUser(myData).then(newUser => {
-    const markup = userTemplate(newUser);
-    refs.userListElem.insertAdjacentHTML('afterbegin', markup);
-  });
+  const newUser = await createUser(myData);
+  const markup = userTemplate(newUser);
+  refs.userListElem.insertAdjacentHTML('afterbegin', markup);
 
   e.target.reset();
 }
-function onUpdateUser(e) {
+
+async function onUpdateUser(e) {
   e.preventDefault();
 
   const myData = {};
@@ -51,16 +51,16 @@ function onUpdateUser(e) {
     }
   });
 
-  updateUser(myData).then(updatedUser => {
-    const markup = userTemplate(updatedUser);
-    const oldUser = document.querySelector(`[data-id="${myData.id}"]`);
-    oldUser.insertAdjacentHTML('afterend', markup);
-    oldUser.remove();
-  });
+  const updatedUser = await updateUser(myData);
+  const markup = userTemplate(updatedUser);
+  const oldUser = document.querySelector(`[data-id="${myData.id}"]`);
+  oldUser.insertAdjacentHTML('afterend', markup);
+  oldUser.remove();
 
   e.target.reset();
 }
-function onResetUser(e) {
+
+async function onResetUser(e) {
   e.preventDefault();
 
   const myData = {};
@@ -70,28 +70,33 @@ function onResetUser(e) {
     myData[key] = value;
   });
 
-  resetUser(myData).then(updatedUser => {
+  try {
+    const updatedUser = await resetUser(myData);
     const markup = userTemplate(updatedUser);
     const oldUser = document.querySelector(`[data-id="${myData.id}"]`);
     oldUser.insertAdjacentHTML('afterend', markup);
     oldUser.remove();
-  });
+  } catch (err) {
+    console.log('err1');
+    console.log('err2');
+    console.log('err3');
+  }
 
   e.target.reset();
 }
-function onDeleteUser(e) {
+
+async function onDeleteUser(e) {
   e.preventDefault();
 
   const id = e.target.elements.userId.value;
 
-  deleteUser(id)
-    .then(() => {
-      const oldUser = document.querySelector(`[data-id="${id}"]`);
-      oldUser.remove();
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  try {
+    await deleteUser(id);
+    const oldUser = document.querySelector(`[data-id="${id}"]`);
+    oldUser.remove();
+  } catch (err) {
+    console.log(err);
+  }
 
   e.target.reset();
 }
