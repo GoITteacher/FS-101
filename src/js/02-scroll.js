@@ -1,8 +1,4 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-
-import { fetchArticles } from './modules/newsAPI2.js';
-import { articlesTemplate } from './templates/render-function2.js';
+import { getArticles } from './modules/newsApi2';
 
 const refs = {
   formElem: document.querySelector('.js-search-form'),
@@ -10,110 +6,95 @@ const refs = {
   targetElem: document.querySelector('.js-target'),
   loadElem: document.querySelector('.js-loader'),
 };
+// ====================================================
 
-// ======================================
 let query;
-let page;
+let currentPage;
 let maxPage;
+
+// ====================================================
 
 refs.formElem.addEventListener('submit', onFormSubmit);
 
-// ======================================
-
 async function onFormSubmit(e) {
   e.preventDefault();
+  showLoader();
   query = e.target.elements.query.value.trim();
-  page = 1;
+  currentPage = 1;
+  refs.articleListElem.innerHTML = '';
 
   if (!query) {
-    showError('Empty field');
+    console.log('err');
     return;
   }
 
-  showLoader();
-
-  try {
-    const data = await fetchArticles(query, page);
-    if (data.totalResults === 0) {
-      showError('Sorry!');
-    }
-    maxPage = data.total_pages;
-    refs.articleListElem.innerHTML = '';
-    renderArticles(data.articles);
-  } catch (err) {
-    showError(err);
-  }
-
-  hideLoader();
-  checkObserverStatus();
-  e.target.reset();
-}
-
-async function onLoadMore() {
-  page += 1;
-  showLoader();
-  const data = await fetchArticles(query, page);
+  const data = await getArticles(query, currentPage);
+  maxPage = data.total_pages;
   renderArticles(data.articles);
-  hideLoader();
   checkObserverStatus();
-
-  scrollBy({
-    behavior: 'smooth',
-    top: 1000,
-  });
+  hideLoader();
 }
 
-// ======================================
-function renderArticles(articles) {
-  const markup = articlesTemplate(articles);
+async function loadMore() {
+  currentPage += 1;
+  showLoader();
+  const data = await getArticles(query, currentPage);
+  renderArticles(data.articles);
+  checkObserverStatus();
+  hideLoader();
+}
+// ====================================================
+
+function articleTemplate(obj) {
+  const { media, title, summary, author, published_date } = obj;
+  return `<li class="card news-card">
+  <img loading="lazy"
+    class="news-image"
+    src="${media}"
+    alt="${title}"
+  />
+  <h3 class="card-title">
+    ${title}
+  </h3>
+  <p class="card-desc">
+  ${summary}
+  </p>
+  <div class="card-footer">
+    <span>${author}</span>
+    <span>${published_date}</span>
+  </div>
+</li>`;
+}
+
+function articlesTemplate(arr) {
+  return arr.map(articleTemplate).join('');
+}
+
+function renderArticles(arr) {
+  const markup = articlesTemplate(arr);
   refs.articleListElem.insertAdjacentHTML('beforeend', markup);
 }
 
-function observeTarget() {
-  console.log('observe');
-  observer.observe(refs.targetElem);
-}
-function unobserveTarget() {
-  console.log('unobserve');
-  observer.unobserve(refs.targetElem);
+function checkObserverStatus() {
+  if (currentPage >= maxPage) {
+    observer.unobserve(refs.targetElem);
+  } else {
+    observer.observe(refs.targetElem);
+  }
 }
 
 function showLoader() {
   refs.loadElem.classList.remove('hidden');
 }
+
 function hideLoader() {
   refs.loadElem.classList.add('hidden');
 }
+// ====================================================
+const observer = new IntersectionObserver(observerCallback);
 
-function showError(msg) {
-  iziToast.error({
-    title: 'Error',
-    message: msg,
-  });
+function observerCallback(entries) {
+  const entry = entries[0];
+  if (!entry.isIntersecting) return;
+  loadMore();
 }
-
-function checkObserverStatus() {
-  if (page >= maxPage) {
-    unobserveTarget();
-    showError('Sorry! The End!');
-  } else {
-    observeTarget();
-  }
-}
-// ========================================
-
-const options = {
-  root: document.querySelector('#scrollArea'),
-  rootMargin: '0px',
-  threshold: 1.0,
-};
-
-const callback = function (entries, observer) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      onLoadMore();
-    }
-  });
-};
-
-const observer = new IntersectionObserver(callback, options);

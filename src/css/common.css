@@ -38,7 +38,6 @@ img {
   flex-direction: row;
   flex-wrap: wrap;
   width: 90vw;
-  overflow-y: auto;
   padding: 20px;
   align-items: center;
   justify-content: center;

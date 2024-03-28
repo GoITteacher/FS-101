@@ -1,8 +1,6 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+import { getArticles } from './modules/newsAPI';
 
-import { fetchArticles } from './modules/newsAPI.js';
-import { articlesTemplate } from './templates/render-functions.js';
+// =====================================================
 
 const refs = {
   formElem: document.querySelector('.js-search-form'),
@@ -11,72 +9,63 @@ const refs = {
   loadElem: document.querySelector('.js-loader'),
 };
 
-// ======================================
 let query;
-let page;
-let maxPage;
+let currentPage = 1;
+let maxPage = 0;
+const pageSize = 6;
+
+// =====================================================
 
 refs.formElem.addEventListener('submit', onFormSubmit);
 refs.btnLoadMore.addEventListener('click', onLoadMoreClick);
 
-// ======================================
-
 async function onFormSubmit(e) {
   e.preventDefault();
+
   query = e.target.elements.query.value.trim();
-  page = 1;
+  refs.articleListElem.innerHTML = '';
+  currentPage = 1;
 
   if (!query) {
-    showError('Empty field');
+    alert('Empty fields');
     return;
   }
 
-  showLoader();
-
   try {
-    const data = await fetchArticles(query, page);
-    if (data.totalResults === 0) {
-      showError('Sorry!');
-    }
-    maxPage = Math.ceil(data.totalResults / 15);
-    refs.articleListElem.innerHTML = '';
+    showLoader();
+    const data = await getArticles(query, currentPage);
+    maxPage = Math.ceil(data.totalResults / pageSize);
     renderArticles(data.articles);
   } catch (err) {
-    showError(err);
+    console.log(err);
   }
 
   hideLoader();
-  checkBtnVisibleStatus();
+  checkBtnStatus();
   e.target.reset();
 }
 
 async function onLoadMoreClick() {
-  page += 1;
+  currentPage += 1;
   showLoader();
-  const data = await fetchArticles(query, page);
-  renderArticles(data.articles);
+  try {
+    const data = await getArticles(query, currentPage);
+    renderArticles(data.articles);
+  } catch (err) {
+    console.log(err);
+  }
+
+  myScroll();
+  checkBtnStatus();
   hideLoader();
-  checkBtnVisibleStatus();
-
-  const height =
-    refs.articleListElem.firstElementChild.getBoundingClientRect().height;
-
-  scrollBy({
-    behavior: 'smooth',
-    top: 10,
-  });
 }
 
-// ======================================
-function renderArticles(articles) {
-  const markup = articlesTemplate(articles);
-  refs.articleListElem.insertAdjacentHTML('beforeend', markup);
-}
+// =====================================================
 
-function showLoadBtn() {
+function showLoadMore() {
   refs.btnLoadMore.classList.remove('hidden');
 }
-function hideLoadBtn() {
+function hideLoadMore() {
   refs.btnLoadMore.classList.add('hidden');
 }
 
@@ -87,18 +76,50 @@ function hideLoader() {
   refs.loadElem.classList.add('hidden');
 }
 
-function showError(msg) {
-  iziToast.error({
-    title: 'Error',
-    message: msg,
-  });
-}
-
-function checkBtnVisibleStatus() {
-  if (page >= maxPage) {
-    hideLoadBtn();
+function checkBtnStatus() {
+  if (currentPage >= maxPage) {
+    hideLoadMore();
   } else {
-    showLoadBtn();
+    showLoadMore();
   }
 }
-// ========================================
+// =====================================================
+
+function articleTemplate(obj) {
+  const { urlToImage, title, description, author, publishedAt } = obj;
+
+  return `<li class="card news-card">
+  <img
+    loading="lazy"
+    class="news-image"
+    src="${urlToImage}"
+    alt="${title}"
+  />
+  <h3 class="card-title">${title}</h3>
+  <p class="card-desc">${description}</p>
+  <div class="card-footer">
+    <span>${author}</span>
+    <span>${publishedAt}</span>
+  </div>
+</li>`;
+}
+
+function articlesTemplate(arr) {
+  return arr.map(articleTemplate).join('');
+}
+
+function renderArticles(arr) {
+  const markup = articlesTemplate(arr);
+  refs.articleListElem.insertAdjacentHTML('beforeend', markup);
+}
+
+// =====================================================
+
+function myScroll() {
+  const height = refs.articleListElem.firstChild.getBoundingClientRect().height;
+
+  scrollBy({
+    top: height,
+    behavior: 'smooth',
+  });
+}
